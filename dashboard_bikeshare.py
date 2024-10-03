@@ -196,7 +196,7 @@ fig = px.line(hourly_users_df,
 
 st.plotly_chart(fig, use_container_width=True)
 
-st.caption('Copyright (c), created by M. Hilma Minanur Rohman')
+st.caption('Dibuat oleh M. Hilma Minanur Rohman')
 
 # ----- HIDE STREAMLIT STYLE -----
 hide_st_style = """
