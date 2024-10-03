@@ -162,7 +162,7 @@ st.markdown("---")
 
 
 # ----- CHART -----
-fig, ax = plt.subplots(figsize=(20, 10))
+fig, ax = plt.subplots(figsize=(25, 8))
 sns.barplot(
         y="cnt", 
         x="season",
