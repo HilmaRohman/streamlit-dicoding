@@ -170,6 +170,18 @@ sns.barplot(
         ax=ax
 )
 
+
+
+ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
+ax.set_ylabel(None)
+ax.set_xlabel(None)
+ax.tick_params(axis='x', labelsize=35)
+ax.tick_params(axis='y', labelsize=30)
+st.pyplot(fig)
+
+
+# -----[]
+
 # Membuat scatter plot
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.scatterplot(data=main_data, x="atemp", y="cnt", hue="holiday", ax=ax)
@@ -182,12 +194,6 @@ ax.set_ylabel("Count (cnt)", fontsize=14)
 # Menampilkan plot di aplikasi Streamlit
 st.pyplot(fig)
 
-ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
-ax.set_ylabel(None)
-ax.set_xlabel(None)
-ax.tick_params(axis='x', labelsize=35)
-ax.tick_params(axis='y', labelsize=30)
-st.pyplot(fig)
 # -----[]
 fig = px.line(monthly_users_df,
               x='yearmonth',
