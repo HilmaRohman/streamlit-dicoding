@@ -169,6 +169,19 @@ sns.barplot(
         data=bysession_df.sort_values(by="season", ascending=False),
         ax=ax
 )
+
+# Membuat scatter plot
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.scatterplot(data=main_data, x="atemp", y="cnt", hue="holiday", ax=ax)
+
+# Menambahkan judul dan pengaturan sumbu
+ax.set_title("Scatter Plot of Count vs. Temperature with Holidays", fontsize=20)
+ax.set_xlabel("Temperature (atemp)", fontsize=14)
+ax.set_ylabel("Count (cnt)", fontsize=14)
+
+# Menampilkan plot di aplikasi Streamlit
+st.pyplot(fig)
+
 ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
 ax.set_ylabel(None)
 ax.set_xlabel(None)
