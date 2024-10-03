@@ -12,11 +12,19 @@ import streamlit as st
 df = pd.read_csv("https://raw.githubusercontent.com/HilmaRohman/dicoding-data/refs/heads/main/cleaned_dataset.csv")
 df['dteday'] = pd.to_datetime(df['dteday'])
 
-st.set_page_config(page_title="Capital Bikeshare: Bike-sharing Dashboard",
+st.set_page_config(page_title="Dashboard Bikeshare",
                    page_icon="bar_chart:",
                    layout="wide")
 
 # create helper functions
+
+def create_byseason_df(df):
+    byseason_df = df.groupby('season')['cnt'].sum().reset_index()
+    # bygender_df.rename(columns={
+    #     "customer_id": "customer_count"
+    # }, inplace=True)
+    
+    return byseason_df
 
 def create_monthly_users_df(df):
     monthly_users_df = df.resample(rule='M', on='dteday').agg({
@@ -122,39 +130,52 @@ with st.sidebar:
         value=[min_date, max_date]
     )
 
-# hubungkan filter dengan main_df
+# hubungkan filter dengan main_data
 
-main_df = df[
+main_data = df[
     (df["dteday"] >= str(start_date)) &
     (df["dteday"] <= str(end_date))
 ]
 
-# assign main_df ke helper functions yang telah dibuat sebelumnya
+# assign main_data ke helper functions yang telah dibuat sebelumnya
 
-monthly_users_df = create_monthly_users_df(main_df)
-weekday_users_df = create_weekday_users_df(main_df)
-seasonly_users_df = create_seasonly_users_df(main_df)
-hourly_users_df = create_hourly_users_df(main_df)
+monthly_users_df = create_monthly_users_df(main_data)
+weekday_users_df = create_weekday_users_df(main_data)
+seasonly_users_df = create_seasonly_users_df(main_data)
+hourly_users_df = create_hourly_users_df(main_data)
+bysession_df = create_byseason_df(main_data)
 
 # ----- MAINPAGE -----
 st.title(":bar_chart: Capital Bikeshare: Bike-Sharing Dashboard")
 st.markdown("##")
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
-    total_all_rides = main_df['cnt'].sum()
-    st.metric("Total Rides", value=total_all_rides)
+    jumlah_casual = main_data['casual'].sum()
+    st.metric("Jumlah Pengendara Casual", value=jumlah_casual)
 with col2:
-    total_casual_rides = main_df['casual'].sum()
-    st.metric("Total Casual Rides", value=total_casual_rides)
-with col3:
-    total_registered_rides = main_df['registered'].sum()
-    st.metric("Total Registered Rides", value=total_registered_rides)
+    jumlah_registrasi = main_data['registered'].sum()
+    st.metric("Jumlah Pengendara Teregistrasi", value=jumlah_registrasi)
 
 st.markdown("---")
 
+
 # ----- CHART -----
+fig, ax = plt.subplots(figsize=(20, 10))
+sns.barplot(
+        y="cnt", 
+        x="season",
+        data=bysession_df.sort_values(by="season", ascending=False),
+        ax=ax
+)
+ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
+ax.set_ylabel(None)
+ax.set_xlabel(None)
+ax.tick_params(axis='x', labelsize=35)
+ax.tick_params(axis='y', labelsize=30)
+st.pyplot(fig)
+# -----[]
 fig = px.line(monthly_users_df,
               x='yearmonth',
               y=['casual_rides', 'registered_rides', 'total_rides'],
