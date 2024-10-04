@@ -75,7 +75,7 @@ st.pyplot(fig)
 # scatter plot
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.scatterplot(data=main_data, x="atemp", y="cnt", hue="holiday", ax=ax,palette={0: "black", 1: "red"})
-ax.set_title("Jumlah pengguna bikshare pada saat liburan pada suhu tertentu", fontsize=20)
+ax.set_title("Jumlah pengguna bikshare berdasarkan liburan dan suhu", fontsize=20)
 ax.set_xlabel("Temperature (atemp)", fontsize=14)
 ax.set_ylabel("Count (cnt)", fontsize=14)
 st.pyplot(fig)
