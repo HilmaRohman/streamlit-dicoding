@@ -26,90 +26,6 @@ def create_byseason_df(df):
     
     return byseason_df
 
-def create_monthly_users_df(df):
-    monthly_users_df = df.resample(rule='M', on='dteday').agg({
-        "casual": "sum",
-        "registered": "sum",
-        "cnt": "sum"
-    })
-    monthly_users_df.index = monthly_users_df.index.strftime('%b-%y')
-    monthly_users_df = monthly_users_df.reset_index()
-    monthly_users_df.rename(columns={
-        "dteday": "yearmonth",
-        "cnt": "total_rides",
-        "casual": "casual_rides",
-        "registered": "registered_rides"
-    }, inplace=True)
-    
-    return monthly_users_df
-
-def create_seasonly_users_df(df):
-    seasonly_users_df = df.groupby("season").agg({
-        "casual": "sum",
-        "registered": "sum",
-        "cnt": "sum"
-    })
-    seasonly_users_df = seasonly_users_df.reset_index()
-    seasonly_users_df.rename(columns={
-        "cnt": "total_rides",
-        "casual": "casual_rides",
-        "registered": "registered_rides"
-    }, inplace=True)
-    
-    seasonly_users_df = pd.melt(seasonly_users_df,
-                                      id_vars=['season'],
-                                      value_vars=['casual_rides', 'registered_rides'],
-                                      var_name='type_of_rides',
-                                      value_name='count_rides')
-    
-    seasonly_users_df['season'] = pd.Categorical(seasonly_users_df['season'],
-                                             categories=['Spring', 'Summer', 'Fall', 'Winter'])
-    
-    seasonly_users_df = seasonly_users_df.sort_values('season')
-    
-    return seasonly_users_df
-
-def create_weekday_users_df(df):
-    weekday_users_df = df.groupby("weekday").agg({
-        "casual": "sum",
-        "registered": "sum",
-        "cnt": "sum"
-    })
-    weekday_users_df = weekday_users_df.reset_index()
-    weekday_users_df.rename(columns={
-        "cnt": "total_rides",
-        "casual": "casual_rides",
-        "registered": "registered_rides"
-    }, inplace=True)
-    
-    weekday_users_df = pd.melt(weekday_users_df,
-                                      id_vars=['weekday'],
-                                      value_vars=['casual_rides', 'registered_rides'],
-                                      var_name='type_of_rides',
-                                      value_name='count_rides')
-    
-    weekday_users_df['weekday'] = pd.Categorical(weekday_users_df['weekday'],
-                                             categories=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
-    
-    weekday_users_df = weekday_users_df.sort_values('weekday')
-    
-    return weekday_users_df
-
-def create_hourly_users_df(df):
-    hourly_users_df = df.groupby("hr").agg({
-        "casual": "sum",
-        "registered": "sum",
-        "cnt": "sum"
-    })
-    hourly_users_df = hourly_users_df.reset_index()
-    hourly_users_df.rename(columns={
-        "cnt": "total_rides",
-        "casual": "casual_rides",
-        "registered": "registered_rides"
-    }, inplace=True)
-    
-    return hourly_users_df
-
 # make filter components (komponen filter)
 
 min_date = df["dteday"].min()
@@ -139,10 +55,6 @@ main_data = df[
 
 # assign main_data ke helper functions yang telah dibuat sebelumnya
 
-monthly_users_df = create_monthly_users_df(main_data)
-weekday_users_df = create_weekday_users_df(main_data)
-seasonly_users_df = create_seasonly_users_df(main_data)
-hourly_users_df = create_hourly_users_df(main_data)
 bysession_df = create_byseason_df(main_data)
 
 # ----- MAINPAGE -----
