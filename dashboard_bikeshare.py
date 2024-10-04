@@ -57,7 +57,6 @@ with col2:
 
 st.markdown("---")
 # Grafik
-st.markdown("---")
 # barplot
 fig, ax = plt.subplots(figsize=(17, 8))
 sns.barplot(
@@ -73,6 +72,7 @@ ax.set_xlabel(None)
 ax.tick_params(axis='x', labelsize=35)
 ax.tick_params(axis='y', labelsize=30)
 st.pyplot(fig)
+st.markdown("---")
 # scatter plot
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.scatterplot(data=main_data, x="atemp", y="cnt", hue="holiday", ax=ax,palette={0: "black", 1: "red"})
