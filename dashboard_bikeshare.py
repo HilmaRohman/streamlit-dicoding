@@ -63,7 +63,8 @@ sns.barplot(
         y="cnt", 
         x="season",
         data=bysession_df.sort_values(by="season", ascending=False),
-        ax=ax
+        ax=ax,
+        color="red"
 )
 ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
 ax.set_ylabel(None)
