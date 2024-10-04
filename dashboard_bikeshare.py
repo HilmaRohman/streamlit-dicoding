@@ -195,46 +195,6 @@ ax.set_ylabel("Count (cnt)", fontsize=14)
 st.pyplot(fig)
 
 # -----[]
-# fig = px.line(monthly_users_df,
-#               x='yearmonth',
-#               y=['casual_rides', 'registered_rides', 'total_rides'],
-#               color_discrete_sequence=["skyblue", "orange", "red"],
-#               markers=True,
-#               title="Monthly Count of Bikeshare Rides").update_layout(xaxis_title='', yaxis_title='Total Rides')
-
-# st.plotly_chart(fig, use_container_width=True)
-
-# fig1 = px.bar(seasonly_users_df,
-            #   x='season',
-            #   y=['count_rides'],
-            #   color='type_of_rides',
-            #   color_discrete_sequence=["skyblue", "orange", "red"],
-            #   title='Count of bikeshare rides by season').update_layout(xaxis_title='', yaxis_title='Total Rides')
-
-#st.plotly_chart(fig, use_container_width=True)
-
-# fig2 = px.bar(weekday_users_df,
-#               x='weekday',
-#               y=['count_rides'],
-#               color='type_of_rides',
-#               barmode='group',
-#               color_discrete_sequence=["skyblue", "orange", "red"],
-#               title='Count of bikeshare rides by weekday').update_layout(xaxis_title='', yaxis_title='Total Rides')
-
-#st.plotly_chart(fig, use_container_width=True)
-
-# left_column, right_column = st.columns(2)
-# left_column.plotly_chart(fig1, use_container_width=True)
-# right_column.plotly_chart(fig2, use_container_width=True)
-
-# fig = px.line(hourly_users_df,
-#               x='hr',
-#               y=['casual_rides', 'registered_rides'],
-#               color_discrete_sequence=["skyblue", "orange"],
-#               markers=True,
-#               title='Count of bikeshare rides by hour of day').update_layout(xaxis_title='', yaxis_title='Total Rides')
-
-# st.plotly_chart(fig, use_container_width=True)
 
 st.caption('Dibuat oleh M. Hilma Minanur Rohman')
 
