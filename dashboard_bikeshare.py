@@ -58,7 +58,7 @@ with col2:
 st.markdown("---")
 # Grafik
 # barplot
-fig, ax = plt.subplots(figsize=(25, 8))
+fig, ax = plt.subplots(figsize=(17, 8))
 sns.barplot(
         y="cnt", 
         x="season",
@@ -66,7 +66,7 @@ sns.barplot(
         ax=ax,
         color="red"
 )
-ax.set_title("Number of Customer by Season", loc="center", fontsize=50)
+ax.set_title("Jumlah Pengguna Bikeshare tiap musim", loc="center", fontsize=50)
 ax.set_ylabel(None)
 ax.set_xlabel(None)
 ax.tick_params(axis='x', labelsize=35)
