@@ -45,7 +45,7 @@ main_data = df[
 # memanggil fungsi sebelumnya
 bysession_df = create_byseason_df(main_data)
 # Menu utama
-st.title("Bikesharing dashboard")
+st.title("Bikeshare Dashboard")
 st.markdown("##")
 col1, col2 = st.columns(2)
 with col1:
