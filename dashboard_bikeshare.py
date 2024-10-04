@@ -57,6 +57,7 @@ with col2:
 
 st.markdown("---")
 # Grafik
+st.markdown("---")
 # barplot
 fig, ax = plt.subplots(figsize=(17, 8))
 sns.barplot(
